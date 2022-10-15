@@ -32,7 +32,7 @@ const Home=() => {
             <div className="container">
                 <div className="box">
                     <h2>Enjoy the kitty 😺</h2>
-                    <img alt="Cat" src={imgUrl}/>
+                    <img alt="Cat" src={imgUrl === '' ? require('./../assets/default_cat.jpg') : imgUrl}/>
                     <button onClick={() => callImg()}>{isLoading ? '...' : 'Click me'}</button>
                 </div>
             </div>
