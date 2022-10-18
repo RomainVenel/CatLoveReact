@@ -1,0 +1,46 @@
+.navbar {
+    display: flex;
+    background: #fff;
+    padding: 10px 10px;
+    box-shadow: 0px 5px 20px -17px rgb(0 0 0 / 34%);
+}
+
+.navbar img {
+    width: 16%;
+}
+
+.buttons {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+}
+
+.navbar-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.li-button {
+    list-style: none;
+}
+
+.title-button {
+    font-size: 13px;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: 400;
+    color: #333333;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 1 !important;
+    cursor: pointer;
+    transition: .3s all ease;
+    text-decoration: none;
+}
+
+.title-button:hover {
+    color: #fec771;
+}
