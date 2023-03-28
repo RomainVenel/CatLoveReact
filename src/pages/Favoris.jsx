@@ -1,14 +1,12 @@
-import React, {useState, useEffect, useMemo} from "react";
+import React, {useState, useMemo} from "react";
 import "./../home.css";
 
 const Favoris=() => {
 
     const [imgUrls, setUrls] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
 
     const callImg=async () => {
-        setIsLoading(true);
 
         try {
             const response = await fetch("https://api.thecatapi.com/v1/votes", {
@@ -28,14 +26,8 @@ const Favoris=() => {
 
         } catch (error) {
             setError(error.message);
-        } finally {
-            setIsLoading(false);
         }
     };
-
-    useEffect(() => {
-        callImg();
-    }, []);
 
     let allImgs = useMemo(() =>callImg(), []);
     allImgs.then(value => setUrls(value));
