@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./../home.css";
 
 const Vote=() => {
@@ -18,10 +18,8 @@ const Vote=() => {
                 console.log(error);
             }
 
-            const result = await response.json();
-            setImage(result[0]);
+            return await response.json();
 
-            setUrl(result[0].url);
         } catch (error) {
             setError(error.message);
         } finally {
@@ -37,8 +35,6 @@ const Vote=() => {
             value: 1 // Voting up (you like it) so send 1
         };
 
-        console.log(body);
-
         try {
             const response = await fetch("https://api.thecatapi.com/v1/votes", {
                 method: "post",
@@ -53,8 +49,7 @@ const Vote=() => {
                 console.log(error);
             }
 
-            const result = await response.json();
-            console.log(result);
+            callImg().then(data => setLoadedImage(data));
 
         } catch (error) {
             setError(error.message);
@@ -63,19 +58,25 @@ const Vote=() => {
         }
     };
 
+    function setLoadedImage(result) {
+        setImage(result[0]);
+        setUrl(result[0].url);
+    }
+
+    useEffect(() => {
+        callImg().then(data => setLoadedImage(data));
+    }, []);
+
     return (
-        <>
-            <div className="container">
-                <div className="box">
-                    <h2>Enjoy the kitty 😺</h2>
-                    <img alt="Cat" src={imgUrl === '' ? require('./../assets/default_cat.jpg') : imgUrl}/>
-                    <button onClick={() => callImg()}>{isLoading ? '...' : 'Click me'}</button>
-                    {imgUrl &&
-                        <button onClick={() => voteUp()}>Vote up</button>
-                    }
-                </div>
+        <div className="container">
+            <div className="box">
+                <h2>Enjoy the kitty 😺</h2>
+                <img alt="Cat" src={imgUrl === '' ? require('./../assets/default_cat.jpg') : imgUrl}/>
+                {imgUrl &&
+                    <button onClick={() => voteUp()}>{isLoading ? '...' : 'Vote pour moi !'}</button>
+                }
             </div>
-        </>
-    )
+        </div>
+)
 }
 export default Vote;
